@@ -2,12 +2,12 @@ package clima
 
 import (
 	"encoding/json"
-	"errors"
 	"fmt"
 	"net/http"
 	"os"
 
 	"github.com/angelokurtis/sensedia-go-2/internal/log"
+	"github.com/pkg/errors"
 
 	"github.com/angelokurtis/sensedia-go-2/pkg/localização"
 )
@@ -37,7 +37,7 @@ func (o *OpenWeather) AferirCoordenadas(lat float64, lon float64) (*Clima, error
 	endpoint := fmt.Sprintf("http://api.openweathermap.org/data/2.5/weather?lat=%f&lon=%f&APPID=%s&units=metric&lang=pt", lat, lon, ak)
 	r, err := http.Get(endpoint)
 	if err != nil {
-		return nil, err
+		return nil, errors.WithStack(err)
 	}
 	if r.StatusCode == http.StatusOK {
 		b := r.Body
@@ -45,7 +45,7 @@ func (o *OpenWeather) AferirCoordenadas(lat float64, lon float64) (*Clima, error
 		w := &OpenWeatherResponse{}
 		err = json.NewDecoder(b).Decode(w)
 		if err != nil {
-			return nil, err
+			return nil, errors.WithStack(err)
 		}
 		weathers := w.Weather
 		if len(weathers) < 1 {
