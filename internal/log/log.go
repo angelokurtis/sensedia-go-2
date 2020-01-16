@@ -4,13 +4,12 @@ import (
 	"os"
 	"time"
 
-	"github.com/pkg/errors"
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
 )
 
 func init() {
-	log.Logger = log.Output(zerolog.ConsoleWriter{Out: os.Stderr, TimeFormat: time.StampNano})
+	log.Logger = log.Output(zerolog.ConsoleWriter{Out: os.Stdout, TimeFormat: time.Stamp})
 }
 
 func Info(msg string) {
@@ -30,23 +29,9 @@ func Debugf(format string, v ...interface{}) {
 }
 
 func Error(err error) {
-	logger := log.Error().Caller(1).Err(err)
-	if _, ok := err.(stackTracer); ok {
-		logger.Msgf("%+v\n", err)
-		return
-	}
-	logger.Send()
+	log.Error().Caller(1).Msgf("%+v", err)
 }
 
 func Fatal(err error) {
-	logger := log.Fatal().Caller(1).Err(err)
-	if _, ok := err.(stackTracer); ok {
-		logger.Msgf("%+v\n", err)
-		return
-	}
-	logger.Send()
-}
-
-type stackTracer interface {
-	StackTrace() errors.StackTrace
+	log.Fatal().Caller(1).Msgf("%+v", err)
 }
