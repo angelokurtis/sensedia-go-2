@@ -1,5 +1,8 @@
 # sensedia-go-2
 
-https://ipstack.com/
+Variáveis de ambiente
 
-https://openweathermap.org/api/
+| Name                        	| Required 	| Description                     	|
+|-----------------------------	|----------	|---------------------------------	|
+| OPEN_WEATHER_API_ACCESS_KEY 	| TRUE     	| https://openweathermap.org/api/ 	|
+| IPSTACK_API_ACCESS_KEY      	| TRUE     	| https://ipstack.com/            	|
