@@ -16,8 +16,7 @@ type OpenWeather struct {
 	location localização.Localizador
 }
 
-func NewOpenWeather() *OpenWeather {
-	l := localização.NewIPStack()
+func NewOpenWeather(l localização.Localizador) *OpenWeather {
 	return &OpenWeather{location: l}
 }
 
