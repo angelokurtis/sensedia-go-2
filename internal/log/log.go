@@ -16,7 +16,7 @@ func Info(msg string) {
 }
 
 func Infof(format string, v ...interface{}) {
-	log.Info().Msgf(format, v)
+	log.Info().Msgf(format, v...)
 }
 
 func Debug(msg string) {
@@ -24,7 +24,7 @@ func Debug(msg string) {
 }
 
 func Debugf(format string, v ...interface{}) {
-	log.Debug().Msgf(format, v)
+	log.Debug().Msgf(format, v...)
 }
 
 func Error(err error) {
