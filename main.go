@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	medidor := móduloDeClima.NewOpenWeather()
+	medidor := móduloDeClima.NewOpenWeather() // TODO: use Google's wire initializer to provide the implementations
 	clima, err := medidor.AferirMinhaLocalização()
 	if err != nil {
 		log.Fatal(err)

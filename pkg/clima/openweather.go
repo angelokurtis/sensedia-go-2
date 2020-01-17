@@ -16,7 +16,7 @@ type OpenWeather struct {
 	location localização.Localizador
 }
 
-func NewOpenWeather() *OpenWeather {
+func NewOpenWeather() *OpenWeather { // TODO inject the interface localização.Localizador
 	l := localização.NewIPStack()
 	return &OpenWeather{location: l}
 }
