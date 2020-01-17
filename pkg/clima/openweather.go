@@ -37,7 +37,7 @@ func (o *OpenWeather) AferirCoordenadas(lat float64, lon float64) (*Clima, error
 	endpoint := fmt.Sprintf("http://api.openweathermap.org/data/2.5/weather?lat=%f&lon=%f&APPID=%s&units=metric&lang=pt", lat, lon, ak)
 	r, err := http.Get(endpoint)
 	if err != nil {
-		return nil, err
+		return nil, err // TODO: add context do the HTTP error
 	}
 	if r.StatusCode == http.StatusOK {
 		b := r.Body
@@ -45,7 +45,7 @@ func (o *OpenWeather) AferirCoordenadas(lat float64, lon float64) (*Clima, error
 		w := &OpenWeatherResponse{}
 		err = json.NewDecoder(b).Decode(w)
 		if err != nil {
-			return nil, err
+			return nil, err // TODO: add context to the unmarshalling error
 		}
 		weathers := w.Weather
 		if len(weathers) < 1 {

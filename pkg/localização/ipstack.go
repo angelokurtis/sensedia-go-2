@@ -21,14 +21,14 @@ func (i *IPStack) OndeEstou() (*Local, error) {
 	ak := os.Getenv("IPSTACK_API_ACCESS_KEY")
 	r, err := http.Get("http://api.ipstack.com/check?access_key=" + ak)
 	if err != nil {
-		return nil, err
+		return nil, err // TODO: add context do the HTTP error
 	}
 	b := r.Body
 	defer b.Close()
 	l := &Local{}
 	err = json.NewDecoder(b).Decode(l)
 	if err != nil {
-		return nil, err
+		return nil, err // TODO: add context to the unmarshalling error
 	}
 	if l.Cidade == "" {
 		return nil, errors.New("localização não encontrada")
